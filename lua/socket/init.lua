@@ -3,24 +3,12 @@
 local pin = 4            --> GPIO2
 local value = gpio.HIGH
 
-abort = false
-
 -- Initialise the pin
 gpio.mode(pin, gpio.OUTPUT)
 gpio.write(pin, value)
 
-local ssid = "Wlan_WP2"
+local ssid = "Fresh"
 local pass = "Chronion.7"
-
- function startup()
-    if abort == true then
-        print('startup aborted')
-        return
-    end
-    abort = true
-    -- otherwise, start up
-    dofile ("start.lua")
- end
  
  --init.lua
  wifi.setmode(wifi.STATION)
@@ -40,18 +28,9 @@ local pass = "Chronion.7"
     end
  else
   tmr.stop(1)
-  
  print("ESP8266 mode is: " .. wifi.getmode())
  print("The module MAC address is: " .. wifi.ap.getmac())
  print("Config done, IP is "..wifi.sta.getip())
- dofile ("telnet.lua")
- 
- tmr.alarm(1,5000,0,startup)
-
+ dofile ("bt6500_nocli.lua")
  end
  end)
-
- 
-
-
- 

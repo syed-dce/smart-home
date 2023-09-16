@@ -2,8 +2,8 @@
 -- function dispatcher based on topic and message content
 m_dis = {}
 
-MQTT_CLIENTID = "weather"
-MQTT_HOST = "192.168.1.206"
+MQTT_CLIENTID = "esp-blinkenlite-"
+MQTT_HOST = "192.168.14.65"
 MQTT_PORT = 1883
 
 -- Standard counter variable. Used for modulo arithmatic
@@ -90,16 +90,6 @@ m:on("connect", function(m)
                 local str = string.format("%0.1f", temp)
                 m:publish("/mcu/stat/temp", str, 0, 0,
                 function(m) print("Temp:" .. str) end)
-            end
-            if (dhttemp ~= nil ) then
-                local str = string.format("%0.1f", dhttemp)
-                m:publish("/mcu/stat/dhttemp", str, 0, 0,
-                function(m) print("DHTTemp:" .. str) end)
-            end
-            if (dhthumi ~= nil ) then
-                local str = string.format("%d", dhthumi)
-                m:publish("/mcu/stat/humi", str, 0, 0,
-                function(m) print("DHThumi:" .. str) end)
             end
     end)
         

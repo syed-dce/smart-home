@@ -1,9 +1,10 @@
-local REQUEST_PERIOD = 10000
+pin = 5
+
 local status, temp, humi, temp_dec, humi_dec
 
-tmr.alarm(DHT_ALARM_ID, REQUEST_PERIOD, 1, function ()
+tmr.alarm(4, 5000, 1, function ()
 
-    status, temp, humi, temp_dec, humi_dec = dht.read(GPIO_DHT)
+    status, temp, humi, temp_dec, humi_dec = dht.read(pin)
 
     if status == dht.OK then
         print("DHT Temperature:"..temp..";".."Humidity:"..humi)
@@ -14,4 +15,5 @@ tmr.alarm(DHT_ALARM_ID, REQUEST_PERIOD, 1, function ()
     elseif status == dht.ERROR_TIMEOUT then
         print( "DHT timed out." )
     end
+
 end)

@@ -1,1 +1,0 @@
-../libs/default_config.lua
